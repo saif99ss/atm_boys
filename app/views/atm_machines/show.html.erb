@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @atm_machine.address %>
+</p>
+
+
+
+<p>
+  <strong>Name:</strong>
+  <%= @atm_machine.name %>
+</p>
+
+
+<p>
+  <strong>City:</strong>
+  <%= @atm_machine.city %>
+</p>
+<%=link_to 'Withdrawal'  %> &nbsp; 
+<%=link_to  'Add Deposit' %> &nbsp; 
+<%= link_to' Update info' %> &nbsp;
+<%=link_to ' transactions'%><br>
+
+<%= image_tag"https://maps.googleapis.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@atm_machine.latitude}%2C#{@atm_machine.longitude}" %>
+
+<h3>Nearby ATM_Location</h3>
+<ul>
+<% for atm_machine in  @atm_machine.nearbys(10) %>
+<li><%= link_to atm_machine.address, atm_machine %> (<%= atm_machine.distance.round(2) %> miles)</li>
+<% end %>
+
+
+<%= link_to 'Edit', edit_atm_machine_path(@atm_machine) %> |
+<%= link_to 'Back', atm_machines_path %>
