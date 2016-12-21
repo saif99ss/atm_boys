@@ -17,17 +17,29 @@
   <strong>City:</strong>
   <%= @atm_machine.city %>
 </p>
-<%=link_to 'Withdrawal'  %> &nbsp; 
-<%=link_to  'Add Deposit' %> &nbsp; 
-<%= link_to' Update info' %> &nbsp;
-<%=link_to ' transactions'%><br>
+<%if current_user.account.present? %>
+       <h3> Available  Balance  : 
+       <strong><%=number_to_currency(current_user.account.balance.to_f)%> </strong></h3>
+     <%else%>
+       <h3><strong class="label label-danger text-uppercase "> <%= p " CREATE NEW ACCOUNT!" %></strong></h3>
+     <%end%></center><br>
+
+<center><% if current_user.user_info.present? %>
+    <%=link_to 'Withdrawal', new_withdrawal_account_path(current_user.account), class:"btn btn-info btn-lg" %> &nbsp; 
+   <%=link_to  'Add Deposit',  new_deposit_account_path(current_user.account), class:"btn btn-info btn-lg" %> &nbsp; 
+    <%= link_to' Update info',edit_user_info_path(current_user.user_info.id,atm_no: @atm_machine.id), class:"btn btn-info btn-lg" %> &nbsp;
+    <%=link_to ' transactions',  transaction_list_account_path(current_user.account ),class:"btn btn-info btn-lg"%></center>&nbsp;
+   <%else%> 
+       <center><%= link_to 'Add Account information',new_user_info_path(atm_no: @atm_machine.id ),class:" col-md-4 col-md-offset-2  btn btn-info btn-lg" %></center>
+   <%end%>
+
 
 <%= image_tag"https://maps.googleapis.com/maps/api/staticmap?size=450x300&sensor=false&zoom=16&markers=#{@atm_machine.latitude}%2C#{@atm_machine.longitude}" %>
 
 <h3>Nearby ATM_Location</h3>
 <ul>
 <% for atm_machine in  @atm_machine.nearbys(10) %>
-<li><%= link_to atm_machine.address, atm_machine %> (<%= atm_machine.distance.round(2) %> miles)</li>
+<li><%= link_to atm_machine.address, atm_machine %> (<%= atm_machine.distance.round(5) %> miles)</li>
 <% end %>
 
 

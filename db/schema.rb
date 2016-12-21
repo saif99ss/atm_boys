@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161217065453) do
+ActiveRecord::Schema.define(version: 20161219052945) do
 
   create_table "accounts", force: :cascade do |t|
     t.string   "account_no"
     t.decimal  "balance"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.string   "account_type"
   end
 
   add_index "accounts", ["user_id"], name: "index_accounts_on_user_id"

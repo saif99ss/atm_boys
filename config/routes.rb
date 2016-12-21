@@ -3,12 +3,12 @@ Rails.application.routes.draw do
   resources :user_infos
   resources :atm_machines
   devise_for :users
-  devise_for :views
-  
+
    resources :accounts do
       member do
-        get :new_deposite
-        post :create_deposite
+        get :transaction_list
+        get :new_deposit
+        post :create_deposit
         get :new_withdrawal
         post :create_withdrawal
       

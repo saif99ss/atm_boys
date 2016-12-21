@@ -2,7 +2,7 @@
 
 <h1>Listing Atm Machines</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>Address</th>
@@ -24,9 +24,9 @@
         <td><%= atm_machine.name %></td>
         <td><%= atm_machine.street %></td>
         <td><%= atm_machine.city %></td>
-        <td><%= link_to 'Show', atm_machine %></td>
-        <td><%= link_to 'Edit', edit_atm_machine_path(atm_machine) %></td>
-        <td><%= link_to 'Destroy', atm_machine, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', atm_machine,class:"btn btn-info"%>
+        <td><%= link_to 'Edit', edit_atm_machine_path(atm_machine),class:"btn btn-default" %>
+        <td><%= link_to 'Destroy', atm_machine, class:"btn btn-danger",method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New Atm machine', new_atm_machine_path %>
+<%= link_to 'New Atm machine', new_atm_machine_path,class:"btn btn-primary" %>

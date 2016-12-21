@@ -11,15 +11,25 @@
     
     <% if user_signed_in? %> 
   Welcome: <%= current_user.email %>  |
- <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
+<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
  <%else%>
- <%= link_to "Please Sign Up" , new_user_registration_path   %> |
- <%= link_to "Sign In " , new_user_session_path %>
+ <%= link_to "Please Sign Up" , new_user_registration_path,class:"btn btn-default"   %> 
+ <%= link_to "Sign In " , new_user_session_path,class:"btn btn-default"%>
  <%end%>
-  
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
-
+        
+        
+        <% if notice.present? %>
+              <div class="alert alert-info" id="flash_message" style="text-align: center">
+                  <button class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+                <%= notice %>
+              </div>
+            <% end %>
+            <% if alert.present? %>
+              <div class="alert alert-danger" id="flash_message" style="text-align: center; background-color:#ff0042 ;color:white">
+                  <button class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
+                <%= alert %>
+              </div>
+            <% end %>
 
 <%= yield %>
 
