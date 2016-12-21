@@ -15,10 +15,16 @@ class TransactionsController < ApplicationController
   # GET /transactions/new
   def new
     @transaction = Transaction.new
+    session[:atm_no] = params[:atm_no]
+
+
   end
 
   # GET /transactions/1/edit
   def edit
+    session[:atm_no] = params[:atm_no]
+
+
   end
 
   # POST /transactions
@@ -69,6 +75,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:transaction_no, :transaction_type, :amount, :account_id, :account_id)
+      params.require(:transaction).permit(:transaction_no, :transaction_type, :amount, :account_id, :account_id, :user_id)
     end
 end

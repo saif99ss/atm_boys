@@ -2,7 +2,7 @@
 
 <h1>Listing User Infos</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th>First name</th>
@@ -24,9 +24,9 @@
         <td><%= user_info.phone %></td>
         <td><%= user_info.user_id %></td>
         <td><%= user_info.user %></td>
-        <td><%= link_to 'Show', user_info %></td>
-        <td><%= link_to 'Edit', edit_user_info_path(user_info) %></td>
-        <td><%= link_to 'Destroy', user_info, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', user_info,class:"btn btn-info" %>
+        <td><%= link_to 'Edit', edit_user_info_path(user_info),class:"btn btn-default" %>
+        <td><%= link_to 'Destroy', user_info,class:"btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
       </tr>
     <% end %>
   </tbody>
@@ -34,4 +34,4 @@
 
 <br>
 
-<%= link_to 'New User info', new_user_info_path %>
+<%= link_to 'New User info', new_user_info_path,class:"btn btn-primary" %>

@@ -1,0 +1,42 @@
+<div class="row">
+ <div class="col-md-12 col-md-offset-0 ">
+   <br><h3>All transactions</h3><br>
+   <table  class="table table-bordered table-responsive text-center">
+   
+  
+       <tbody>
+         <tr style="font-weight:bold">
+           <td> ATM LOCATION</td>
+           <td>TRANSACTION No.</td>
+           <td> AMOUNT</td>
+           <td> TYPE</td>
+           <td> TIME</td>
+         </tr>
+           <% @transactions.each do |tran| %>
+           <tr>
+         
+             <td>
+               <%= number_to_currency(tran.amount) %>
+             </td>
+             <td>
+               <% if tran.debit%>
+                 <p style="color:blue"> Debit</p>
+               <%else%>
+                 <p  style="color:red"> Withdrawal</p>
+               <%end%>r
+             </td>
+             <td>
+               <% t=tran.created_at%>
+               <%= t.strftime("%I:%M:%S %p --- %m/%d/%Y")%>
+             </td>
+           </tr> 
+         <%end%>
+       </tbody>
+  
+   </table>
+   <%=link_to 'Back', atm_machine_path(session[:atm_no]),class:"btn btn-danger btn-lg"%>
+   <br>
+ </div>
+</div>
+<!--  <p><%=link_to " PDF Transactions list", transaction_list_account_path(format: 'pdf'),class:"btn btn-info "%></p> -->
+
