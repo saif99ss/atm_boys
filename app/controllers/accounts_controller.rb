@@ -8,6 +8,7 @@ class AccountsController < ApplicationController
  def new_deposit
    @account = Account.find(params[:id])
  end
+
  def create_deposit
    
    @account = Account.find(params[:id])
@@ -18,7 +19,7 @@ class AccountsController < ApplicationController
      if @account.deposit(deposit_params)
        flash[:notice] = "Transaction completed Successfully"
        
-       Transaction.create!(amount: deposit_params[:amount],account_id: @account.id  )
+       Transaction.create!(amount: deposit_params[:amount], debit: true ,account_id: @account.id,atm_machine_id: session[:atm_no]  )
        redirect_to  atm_machine_path(session[:atm_no])
      else
        flash.alert = @account.errors.full_messages.to_sentence
@@ -39,7 +40,7 @@ class AccountsController < ApplicationController
      if @account.withdrawal(withdrawal_params)
        flash[:notice] = "Transaction completed Successfully"
        
-       Transaction.create!(amount: deposit_params[:amount] ,account_id: @account.id)
+       Transaction.create!(amount: deposit_params[:amount], debit: false ,account_id: @account.id,atm_machine_id: session[:atm_no])
       
        redirect_to atm_machine_path(session[:atm_no])
      else
@@ -55,14 +56,9 @@ class AccountsController < ApplicationController
  def transaction_list
    @account = Account.find(params[:id])
    @transactions = @account.transactions
-   #pdf = TransactionsList.new(@transactions)
-   #respond_to do |format|
-    # format.html
-     #format.pdf do
-      # send_data pdf.render , filename: 'transactions_list.pdf', type:'application/pdf', disposition: "inline"
-     #end
-   #end
+  
  end
+ 
  
  def index
    @accounts = Account.all

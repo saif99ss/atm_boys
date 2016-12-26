@@ -1,6 +1,10 @@
 source 'https://rubygems.org'
+gem 'prawn', '~> 2.1'
+  gem 'prawn-table','~>0.1.0'
+
  gem 'bootstrap-sass', '~> 3.3.6'
  gem 'autoprefixer-rails'
+ 
 gem 'geocoder'
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
